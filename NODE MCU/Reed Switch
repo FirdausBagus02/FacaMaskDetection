@@ -9,12 +9,12 @@
 CTBot myBot;
 
 // konfigurasi WIFI
-String ssid = "WARUNG GUYON";
-String pass = "gaktaurek";
+String ssid = "........"; // sesuaikan dengan wifi masing masing
+String pass = "........"; // sesuaikan dengan wifi masing masing
 
 // konfigurasi telegram
-String token = "1827883317:AAFqeXBFvW0YZf83vgbayn_PEceWyMVli4U";
-const int id = 1249381121;
+String token = "........."; // isi sesuai dengan token yang telah didapat
+const int id = ........ ; // isi dengan id telegram pengguna
 
 void setup() {
   Serial.begin(9600);
