@@ -1,0 +1,62 @@
+#include <CTBot.h> //libary telegram
+
+// input sensor dan led
+#define pinreed   5 //D1 - GPIO5
+#define pinled1   4 //D2 - GPIO4
+#define pinled2   14//D5
+
+// sediakan object untuk CTBot
+CTBot myBot;
+
+// konfigurasi WIFI
+String ssid = "......"; //sesuaikan dengan wifi masing masing
+String pass = "......"; //sesuaikan dengan password wifi masing-masing
+
+// konfigurasi telegram
+String token = "....."; //sesuaikan dengan token yang didapatkan di BotFather
+const int id = .......; //sesuaikan dengan id yang didapatkan di GetsIDBot
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pinreed, OUTPUT);
+  pinMode(pinled1, OUTPUT);
+  pinMode(pinled2, OUTPUT);
+
+  // koneksikan nodemcu dengan telegram
+
+  myBot.wifiConnect(ssid, pass);
+  myBot.setTelegramToken(token);
+  
+  // tes telegram
+  if(myBot.testConnection())
+  {
+    digitalWrite(pinled1, HIGH);
+    }
+  else
+  {
+    digitalWrite(pinled1, LOW);
+  }
+}
+
+void loop() 
+{
+  //membaca nilai sensor reed
+  int reed = digitalRead(pinreed);
+  Serial.println(reed);
+  // uji nilai sensor reed
+  if(reed==0)
+  {
+  // aktifkan LED
+  digitalWrite(pinled2, HIGH);
+  // kirim notif
+  myBot.sendMessage(id, "pintu anda terbuka, mohon berhati-hati");
+  }
+  else
+  {
+  // matikan buzzer
+  digitalWrite (pinled2, LOW);
+  }
+   
+  delay(300);
+
+}
